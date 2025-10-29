@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styled from "@emotion/styled";
-import axios from "axios";
-import cryptoImagen from "./Images/cryptomonedas.png";
-import Form from "./Components/Form/Form";
-import CryptoQuote from "./Components/CryptoQuote/CryptoQuote";
-import Spinner from "./Components/Spinner/Spinner";
-import { handleCrytoAPICall } from "./api/handleCryptoAPICall";
-import { useTranslation } from "react-i18next";
-import Error from "./Components/Error/Error";
+import React, { useState, useEffect } from 'react';
+import styled from '@emotion/styled';
+import axios from 'axios';
+import cryptoImagen from './Images/cryptomonedas.png';
+import Form from './Components/Form/Form';
+import CryptoQuote from './Components/CryptoQuote/CryptoQuote';
+import Spinner from './Components/Spinner/Spinner';
+import { handleCrytoAPICall } from './api/handleCryptoAPICall';
+import { useTranslation } from 'react-i18next';
+import Error from './Components/Error/Error';
+import LanguageSwitcher from './Components/LanguageSwitcher';
 
 const Container = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ const DisplayInfo = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-family: "Roboto";
+  font-family: 'Roboto';
   color: #141313ff;
   text-align: left;
   font-size: 18px;
@@ -67,7 +68,7 @@ function App() {
   const { t } = useTranslation();
 
   const handleFormSubmit = async (cryptoCurrency, currency) => {
-    if (currency === "" || cryptoCurrency === "") {
+    if (currency === '' || cryptoCurrency === '') {
       setError(true);
       return;
     }
@@ -83,22 +84,19 @@ function App() {
       setError(false);
     }
   };
-  const componente = loading ? (
-    <Spinner />
-  ) : (
-    <CryptoQuote cryptoData={cryptoData} />
-  );
+  const componente = loading ? <Spinner /> : <CryptoQuote cryptoData={cryptoData} />;
   return (
     <Container>
       <HeaderSection>
-        <Heading>{t("title")}</Heading>
+        <Heading>
+          {t('title')}
+          <LanguageSwitcher />
+        </Heading>
       </HeaderSection>
       <FormSection>
         <Form handleFormSubmit={handleFormSubmit} error={error} />
       </FormSection>
-      <DisplayInfo>
-        {apiError ? <Error mensaje={t("apiError")} /> : componente}
-      </DisplayInfo>
+      <DisplayInfo>{apiError ? <Error mensaje={t('apiError')} /> : componente}</DisplayInfo>
     </Container>
   );
 }
