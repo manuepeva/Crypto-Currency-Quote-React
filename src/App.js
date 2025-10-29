@@ -1,118 +1,105 @@
-import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
-import axios from 'axios';
-import cryptoImagen from './Images/cryptomonedas.png';
-import Formulario from './Components/Formulario/Formulario';
-import Cotizacion from './Components/Cotizacion/Cotizacion';
-import Spinner from './Components/Spinner/Spinner';
+import React, { useState, useEffect } from "react";
+import styled from "@emotion/styled";
+import axios from "axios";
+import cryptoImagen from "./Images/cryptomonedas.png";
+import Form from "./Components/Form/Form";
+import CryptoQuote from "./Components/CryptoQuote/CryptoQuote";
+import Spinner from "./Components/Spinner/Spinner";
+import { handleCrytoAPICall } from "./api/handleCryptoAPICall";
+import { useTranslation } from "react-i18next";
+import Error from "./Components/Error/Error";
 
-
-
-const Contenedor = styled.div`
-    max-width: 900px;
-    margin: 0 auto;
-    @media (min-width: 992px){
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 2rem;
-    }
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-image: url(${cryptoImagen});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
-const Imagen = styled.img`
-    max-width: 100%;
-    margin-top: 5rem;
+const HeaderSection = styled.div`
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+  height: 8vh;
+  background-color: lightblue;
+  box-shadow: 0px 0px 0px 2px white;
+`;
+
+const FormSection = styled.div`
+  justify-content: center;
+  display: flex;
+  padding-top: 12vh;
+  @media (min-width: 768px) {
+    padding: 20px;
+    flex: 1;
+  }
+`;
+const DisplayInfo = styled.div`
+  display: flex;
+  flex: 1;
 `;
 
 const Heading = styled.h1`
-    font-family: 'Bebas Neue', cursive;
-    color: #fff;
-    text-align: left;
-    font-weight: 700;
-    font-size: 50px;
-    margin-bottom: 50px;
-    margin-top: 80px;
-
-    &::after{
-      content: '';
-      width: 100px;
-      height: 6px;
-      background-color: #66a2fe;
-      display: block;
-    }
+  font-family: "Roboto";
+  color: #141313ff;
+  text-align: left;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
 `;
 
-
 function App() {
+  const [cryptoData, setCryptoData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [apiError, setApiError] = useState(false);
+  const { t } = useTranslation();
 
-  const [moneda, guardarMoneda] = useState('');
-  const [cryptomoneda, guardarCryptoMoneda] = useState('');
-  const [resultado, guardarResultado] = useState({});
-  const [cargando, guardarCargando] = useState(false);
-
-  useEffect(() => {
-
-    const cotizarCryptoMoneda = async () => {
-
-      // Evitamos la ejecución la primera vez
-      if (moneda === '') {
-        return;
-      }
-
-
-      // Hacer la consulta a la API para obtener la cotizacion
-
-      const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptomoneda}&tsyms=${moneda}`;
-      const resultado = await axios.get(url);
-
-      // Mostrar el Spinner
-      guardarCargando(true);
-
-      // Using set time out to hide the spinner
-
-      setTimeout(() => {
-
-        // Cambiar el estado de cargando
-
-        guardarCargando(false);
-
-        // Guardar la cotizacion
-        guardarResultado(resultado.data.DISPLAY[cryptomoneda][moneda]);
-      }, 3000);
-
-
+  const handleFormSubmit = async (cryptoCurrency, currency) => {
+    if (currency === "" || cryptoCurrency === "") {
+      setError(true);
+      return;
     }
-    cotizarCryptoMoneda();
-
-  }, [moneda, cryptomoneda]);
-
-
-  // Mostrar el spinner o resultado
-
-  const componente = (cargando) ? <Spinner /> : <Cotizacion
-    resultado={resultado}
-  />
-
-
-
+    setLoading(true);
+    try {
+      const cryptoData = await handleCrytoAPICall(cryptoCurrency, currency);
+      setCryptoData(cryptoData);
+      setLoading(false);
+      setError(false);
+    } catch (error) {
+      setApiError(true);
+      setLoading(false);
+      setError(false);
+    }
+  };
+  const componente = loading ? (
+    <Spinner />
+  ) : (
+    <CryptoQuote cryptoData={cryptoData} />
+  );
   return (
-    <Contenedor>
-      <div>
-        <Imagen
-          src={cryptoImagen}
-          alt="Imagen Crypto"
-        />
-      </div>
-      <div>
-        <Heading>
-          Cotiza Crypto Monedas al Instante
-        </Heading>
-        <Formulario
-          guardarMoneda={guardarMoneda}
-          guardarCryptoMoneda={guardarCryptoMoneda}
-        />
-        {componente}
-      </div>
-    </Contenedor>
+    <Container>
+      <HeaderSection>
+        <Heading>{t("title")}</Heading>
+      </HeaderSection>
+      <FormSection>
+        <Form handleFormSubmit={handleFormSubmit} error={error} />
+      </FormSection>
+      <DisplayInfo>
+        {apiError ? <Error mensaje={t("apiError")} /> : componente}
+      </DisplayInfo>
+    </Container>
   );
 }
 

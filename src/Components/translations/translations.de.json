@@ -1,0 +1,22 @@
+{
+  "title": "Kryptowährungs-Kurs",
+  "selectCurrency": "Wählen Sie Ihre Währung",
+  "selectCrypto": "Wählen Sie Ihre Kryptowährung",
+  "getQuote": "Kurs abrufen",
+  "loading": "Wird geladen...",
+  "result": "Ergebnis",
+  "price": "Preis",
+  "highDay": "Hoch (24h)",
+  "lowDay": "Tief (24h)",
+  "change24h": "Änderung (24h)",
+  "lastUpdate": "Letzte Aktualisierung",
+  "error": "Alle Felder sind erforderlich",
+  "apiError": "Beim Abrufen der Daten von der API ist ein Fehler aufgetreten",
+  "priceIs": "Der Preis ist",
+  "highDayIs": "Der höchste Preis des Tages ist",
+  "lowDayIs": "Der niedrigste Preis des Tages ist",
+  "change24hIs": "Die Änderung in den letzten 24 Stunden war",
+  "lastUpdateIs": "Letzte Aktualisierung",
+  "selectOption": "Auswählen",
+  "criptoName": "Name der Kryptowährung"
+}

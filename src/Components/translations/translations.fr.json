@@ -1,0 +1,22 @@
+{
+  "title": "Devises Crypto",
+  "selectCurrency": "Sélectionnez votre devise",
+  "selectCrypto": "Sélectionnez votre cryptomonnaie",
+  "getQuote": "Obtenir le cours",
+  "loading": "Chargement...",
+  "result": "Résultat",
+  "price": "Prix",
+  "highDay": "Haut (24h)",
+  "lowDay": "Bas (24h)",
+  "change24h": "Changement (24h)",
+  "lastUpdate": "Dernière mise à jour",
+  "error": "Tous les champs sont obligatoires",
+  "apiError": "Une erreur s'est produite lors de la récupération des données de l'API",
+  "priceIs": "Le prix est",
+  "highDayIs": "Le prix le plus élevé du jour est",
+  "lowDayIs": "Le prix le plus bas du jour est",
+  "change24hIs": "La variation des dernières 24 heures était",
+  "lastUpdateIs": "Dernière mise à jour",
+  "selectOption": "Sélectionner",
+  "criptoName": "Nom de la cryptomonnaie"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Crypto Currency Quote",
+  "selectCurrency": "Select your currency",
+  "selectCrypto": "Select your cryptocurrency",
+  "getQuote": "Get Quote",
+  "loading": "Loading...",
+  "result": "Result",
+  "price": "Price",
+  "highDay": "High (24h)",
+  "lowDay": "Low (24h)",
+  "change24h": "Change (24h)",
+  "lastUpdate": "Last update",
+  "error": "All fields are required",
+  "apiError": "There was an error fetching data from the API",
+  "priceIs": "The Price is",
+  "highDayIs": "The Highest Price of the Day is",
+  "lowDayIs": "The Lowest Price of the Day is",
+  "change24hIs": "The Change in the Last 24 Hours was",
+  "lastUpdateIs": "Last Update",
+  "selectOption": "Select",
+  "criptoName": "Cryptocurrency Name"
+}

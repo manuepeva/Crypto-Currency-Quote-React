@@ -1,0 +1,22 @@
+{
+  "title": "Cotizador de Criptomonedas",
+  "selectCurrency": "Selecciona tu moneda",
+  "selectCrypto": "Selecciona tu criptomoneda",
+  "getQuote": "Obtener cotización",
+  "loading": "Cargando...",
+  "result": "Resultado",
+  "price": "Precio",
+  "highDay": "Máximo (24h)",
+  "lowDay": "Mínimo (24h)",
+  "change24h": "Cambio (24h)",
+  "lastUpdate": "Última actualización",
+  "error": "Todos los campos son obligatorios",
+  "apiError": "Hubo un error al obtener los datos de la API",
+  "priceIs": "El Precio es",
+  "highDayIs": "El Precio más alto del Día es",
+  "lowDayIs": "El Precio más bajo del Día es",
+  "change24hIs": "La Variación de las últimas 24 Hrs fue",
+  "lastUpdateIs": "Última Actualización",
+  "selectOption": "Seleccione",
+  "criptoName": "Nombre de la Criptomoneda"
+}
